@@ -46,24 +46,24 @@ plan that lets the user confirm scope before Codex starts editing.
 For a feature or behavior change, Codex should produce something close to this:
 
 ```text
-功能逻辑
+Feature Logic
 - Add device tree filtering by product model and online status.
 - Keep existing status = 1 filtering for normal business queries.
 
-后端改动
-- internal/app/device/types.go（改）: add request fields and response shape.
-- internal/app/device/repository.go（改）: extend query conditions.
-- internal/app/device/service.go（改）: validate filters and preserve existing defaults.
+Backend Changes
+- internal/app/device/types.go (modify): add request fields and response shape.
+- internal/app/device/repository.go (modify): extend query conditions.
+- internal/app/device/service.go (modify): validate filters and preserve existing defaults.
 
-前端改动
-- src/pages/device/DeviceTreePage.tsx（改）: add filter controls.
-- src/components/device/DeviceTreeFilters.tsx（增）: isolate filter UI if the page is already crowded.
-- src/api/device.ts（改）: align request parameters with backend contract.
+Frontend Changes
+- src/pages/device/DeviceTreePage.tsx (modify): add filter controls.
+- src/components/device/DeviceTreeFilters.tsx (add): isolate filter UI if the page is already crowded.
+- src/api/device.ts (modify): align request parameters with backend contract.
 
-数据库/初始化脚本改动
+Database / Init Script Changes
 - No schema change.
 
-验证方式
+Verification
 - Run focused backend tests for device queries.
 - Run frontend typecheck/build for touched pages.
 ```

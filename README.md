@@ -57,7 +57,7 @@ Backend Changes
 
 Frontend Changes
 - src/pages/device/DeviceTreePage.tsx (modify): add filter controls.
-- src/components/device/DeviceTreeFilters.tsx (add): isolate filter UI if the page is already crowded.
+- src/components/device/DeviceTreeFilters.tsx (new): isolate filter UI if the page is already crowded.
 - src/api/device.ts (modify): align request parameters with backend contract.
 
 Database / Init Script Changes

@@ -51,13 +51,14 @@ For a feature or behavior change, Codex should produce something close to this:
 - Keep existing status = 1 filtering for normal business queries.
 
 后端改动
-- internal/app/device/types.go: add request fields and response shape.
-- internal/app/device/repository.go: extend query conditions.
-- internal/app/device/service.go: validate filters and preserve existing defaults.
+- internal/app/device/types.go（改）: add request fields and response shape.
+- internal/app/device/repository.go（改）: extend query conditions.
+- internal/app/device/service.go（改）: validate filters and preserve existing defaults.
 
 前端改动
-- src/pages/device/DeviceTreePage.tsx: add filter controls.
-- src/api/device.ts: align request parameters with backend contract.
+- src/pages/device/DeviceTreePage.tsx（改）: add filter controls.
+- src/components/device/DeviceTreeFilters.tsx（增）: isolate filter UI if the page is already crowded.
+- src/api/device.ts（改）: align request parameters with backend contract.
 
 数据库/初始化脚本改动
 - No schema change.

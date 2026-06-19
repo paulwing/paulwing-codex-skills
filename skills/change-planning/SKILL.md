@@ -28,13 +28,20 @@ Skip only for tiny, direct tasks where the user clearly asks for an immediate co
    - Prefer `rg`/targeted file reads.
 
 2. Produce a concise plan before implementation.
-   Include the following sections as relevant:
+   Use Chinese section titles for Chinese requests. For all non-Chinese requests, use English section titles by default. For Chinese requests, include the following sections as relevant:
    - 功能逻辑
    - 后端改动
    - 前端改动
    - 数据库/初始化脚本改动
    - 文档改动
    - 验证方式
+   For English requests, use:
+   - Feature Logic
+   - Backend Changes
+   - Frontend Changes
+   - Database / Init Script Changes
+   - Documentation Changes
+   - Verification
 
 3. Wait for confirmation.
    - Do not implement until the user confirms, unless the user already explicitly said to implement a previously agreed plan.
@@ -74,6 +81,18 @@ iot-platform-backend/
 
 iot-platform-frontend/
 └── src/pages/ExamplePage.tsx（改）
+```
+
+For English plans, use English file status labels:
+
+```text
+iot-platform-backend/
+├── internal/app/example/
+│   ├── types.go (modify)
+│   └── repository.go (modify)
+
+iot-platform-frontend/
+└── src/pages/ExamplePage.tsx (modify)
 ```
 
 Do not make the plan longer than needed. The plan should help the user confirm scope, not become a full design document unless requested.

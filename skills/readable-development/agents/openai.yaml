@@ -1,0 +1,4 @@
+interface:
+  display_name: "Readable Development"
+  short_description: "Keep code simple, clear, and maintainable"
+  default_prompt: "Use $readable-development to implement this with clear, maintainable code and explain the main code path."

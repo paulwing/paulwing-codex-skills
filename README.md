@@ -61,9 +61,12 @@ The goal is not to create long design documents. The goal is a short, readable
 plan and a simple implementation style that lets the user keep ownership of the
 code.
 
-## Example Planning Style
+## Example Output Styles
 
-For a feature or behavior change, Codex should produce something close to this:
+### Planning Before Changes
+
+For a feature or behavior change, `change-planning` should guide Codex to produce
+something close to this:
 
 ```text
 Feature Logic
@@ -88,8 +91,29 @@ Verification
 - Run frontend typecheck/build for touched pages.
 ```
 
-That is the core behavior this skill tries to preserve: direct, scoped,
+That is the core behavior `change-planning` tries to preserve: direct, scoped,
 confirmable planning before implementation.
+
+### Readable Development Summary
+
+For a completed non-trivial code change, `readable-development` should guide Codex
+to report the code path in a maintainer-oriented way:
+
+```text
+Changed the device tree filter path to keep the query logic direct and local.
+
+The request enters through src/pages/device/DeviceTreePage.tsx, which passes the
+selected filters to src/api/device.ts. Backend validation happens in
+internal/app/device/service.go, and the final status/model conditions are built
+in internal/app/device/repository.go.
+
+No new abstraction was added because the behavior is still specific to this
+page and query. Verification: ran focused backend device tests and frontend
+typecheck.
+```
+
+That is the core behavior `readable-development` tries to preserve: simple code
+with enough explanation for the next maintainer to find the important path.
 
 ## Repository Layout
 
@@ -98,6 +122,8 @@ skills/
 |-- change-planning/
 |   `-- SKILL.md
 `-- readable-development/
+    |-- agents/
+    |   `-- openai.yaml
     `-- SKILL.md
 ```
 

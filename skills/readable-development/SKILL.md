@@ -1,6 +1,6 @@
 ---
 name: readable-development
-description: Use when writing, modifying, refactoring, or reviewing code where readability, maintainability, learning value, low cognitive load, avoiding over-engineering, simple implementation, or explaining code paths and tradeoffs matters.
+description: Use when writing, modifying, refactoring, or reviewing code and the user values readability, maintainability, learning value, low cognitive load, simple implementation, avoiding over-engineering, or clear explanations of code paths and tradeoffs.
 ---
 
 # Readable Development
@@ -71,7 +71,7 @@ If the answer is no, keep the implementation direct.
 
 ## Output Style
 
-When reporting completed code changes, include a maintainer-oriented summary:
+For non-trivial completed code changes, include a maintainer-oriented summary:
 
 - What changed.
 - Where the main code path starts.
@@ -80,4 +80,4 @@ When reporting completed code changes, include a maintainer-oriented summary:
 - What verification was run.
 - Any deliberate simplicity or deferred abstraction.
 
-Keep the explanation concise. The goal is to help the maintainer re-enter the code, not to restate every diff.
+For tiny edits, keep the report brief and include only the details that help the maintainer re-enter the code. The goal is not to restate every diff.

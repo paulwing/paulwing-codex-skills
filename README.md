@@ -120,6 +120,8 @@ with enough explanation for the next maintainer to find the important path.
 ```text
 skills/
 |-- change-planning/
+|   |-- agents/
+|   |   `-- openai.yaml
 |   `-- SKILL.md
 `-- readable-development/
     |-- agents/

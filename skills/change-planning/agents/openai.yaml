@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change Planning"
+  short_description: "Plan scoped code changes before editing"
+  default_prompt: "Use $change-planning to inspect the project, propose a concise implementation plan, and wait for confirmation before editing."

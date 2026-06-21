@@ -6,8 +6,8 @@ Personal Codex skills maintained by Paul Wing. This is not an official OpenAI
 repository.
 
 These skills capture practical agent workflows I use while building software.
-The current focus is simple: make Codex pause before non-trivial code changes,
-inspect the project first, show a clear change plan, and only then implement.
+The current focus is simple: keep Codex deliberate before non-trivial changes
+and keep AI-written code readable enough for real maintainers to own.
 
 ## Available Skills
 
@@ -27,19 +27,39 @@ table, permission rule, or UI flow. The skill guides Codex to:
 It is designed for everyday engineering work where a little planning avoids
 messy edits, accidental API drift, and broad refactors that were never asked for.
 
+### `readable-development`
+
+`readable-development` is a readability-first workflow for Codex.
+
+Use it when writing, modifying, refactoring, or reviewing code where the user
+cares about maintainability, learning value, low cognitive load, or avoiding
+over-engineering. The skill guides Codex to:
+
+- optimize for future maintainers
+- prefer direct implementation before abstraction
+- introduce abstractions only when there is concrete evidence
+- explain the code path after changes
+- match verification effort to the risk of the change
+
+It is designed for users who want AI assistance without letting the codebase
+become harder to understand than the problem it solves.
+
 ## Why This Exists
 
 AI coding agents are fast, but speed can make small assumptions expensive. This
-skill adds a lightweight planning gate before meaningful changes:
+repository adds lightweight workflow guardrails before and during meaningful
+changes:
 
 1. Understand the current state.
 2. Define the change boundary.
 3. Show the affected files and behavior.
 4. Get confirmation.
-5. Implement and verify.
+5. Implement with maintainers in mind.
+6. Verify and explain the resulting code path.
 
 The goal is not to create long design documents. The goal is a short, readable
-plan that lets the user confirm scope before Codex starts editing.
+plan and a simple implementation style that lets the user keep ownership of the
+code.
 
 ## Example Planning Style
 
@@ -75,27 +95,38 @@ confirmable planning before implementation.
 
 ```text
 skills/
-`-- change-planning/
+|-- change-planning/
+|   `-- SKILL.md
+`-- readable-development/
     `-- SKILL.md
 ```
 
 ## Install In Codex
 
-Install from GitHub with Codex's skill installer:
+Install a skill from GitHub with Codex's skill installer:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/change-planning
+```
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/readable-development
 ```
 
 Restart Codex after installing so it can discover the new skill.
 
 ## Update An Existing Install
 
-If you already installed the skill and want the latest version:
+If you already installed a skill and want the latest version:
 
 ```bash
 rm -rf ~/.codex/skills/change-planning
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/change-planning
+```
+
+```bash
+rm -rf ~/.codex/skills/readable-development
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/readable-development
 ```
 
 Restart Codex after updating.

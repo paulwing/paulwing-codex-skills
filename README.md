@@ -79,6 +79,16 @@ Recommended usage:
 - If only one workflow should apply, say so directly in the prompt, for example:
   `Use only $change-planning for this request.`
 
+`readable-development` is configured for explicit invocation only:
+
+```yaml
+policy:
+  allow_implicit_invocation: false
+```
+
+This keeps general coding requests from picking up the readability workflow
+unless the user asks for it with `/skills` or `$readable-development`.
+
 ## Example Output Styles
 
 ### Planning Before Changes

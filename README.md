@@ -61,6 +61,24 @@ The goal is not to create long design documents. The goal is a short, readable
 plan and a simple implementation style that lets the user keep ownership of the
 code.
 
+## Invocation Guidance
+
+For the most predictable behavior, invoke skills explicitly when you care about
+which workflow Codex follows. In Codex CLI or IDE, use `/skills` to pick a skill
+or mention the skill directly in the prompt, such as `$change-planning` or
+`$readable-development`.
+
+Recommended usage:
+
+- Keep `change-planning` available for implicit invocation because it acts like
+  a safety gate before non-trivial code changes.
+- Prefer explicit invocation for `readable-development` when readability,
+  maintainability, or avoiding over-engineering is the main concern.
+- Use both when needed: `$change-planning $readable-development` to plan first,
+  then implement with a readability-first style after confirmation.
+- If only one workflow should apply, say so directly in the prompt, for example:
+  `Use only $change-planning for this request.`
+
 ## Example Output Styles
 
 ### Planning Before Changes

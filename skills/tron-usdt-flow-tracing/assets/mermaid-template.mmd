@@ -1,0 +1,20 @@
+flowchart LR
+    A["Source / Exchange<br/>ADDRESS_SHORT"] -->|"TIME<br/>AMOUNT USDT<br/>tx: HASH_SHORT"| B["Reported recipient<br/>ADDRESS_SHORT"]
+
+    B -->|"TIME<br/>AMOUNT USDT<br/>tx: HASH_SHORT"| C["Intermediate 1<br/>ADDRESS_SHORT"]
+
+    C -.->|"TIME<br/>AMOUNT USDT<br/>tx: HASH_SHORT<br/>mixed downstream flow"| D["Intermediate 2<br/>ADDRESS_SHORT"]
+
+    D -.->|"TIME<br/>AMOUNT USDT<br/>tx: HASH_SHORT"| E["Transition address<br/>ADDRESS_SHORT"]
+
+    E -->|"TIME<br/>AMOUNT USDT<br/>tx: HASH_SHORT"| F["Exchange / service endpoint<br/>ADDRESS_SHORT"]
+
+    classDef exchange fill:#ffe4cc,stroke:#d97706,stroke-width:2px,color:#111;
+    classDef suspect fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111;
+    classDef mixer fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#111;
+    classDef normal fill:#f3f4f6,stroke:#6b7280,color:#111;
+
+    class A,F exchange;
+    class B suspect;
+    class C,D mixer;
+    class E normal;

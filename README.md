@@ -5,9 +5,11 @@
 Personal Codex skills maintained by Paul Wing. This is not an official OpenAI
 repository.
 
-These skills capture practical agent workflows I use while building software.
-The current focus is simple: keep Codex deliberate before non-trivial changes
-and keep AI-written code readable enough for real maintainers to own.
+These skills capture practical agent workflows I use while building software
+and investigating technical problems. The current focus is simple: keep Codex
+deliberate before non-trivial changes, keep AI-written code readable enough for
+real maintainers to own, and turn repeatable investigation workflows into
+clear, evidence-aware outputs.
 
 ## Available Skills
 
@@ -44,6 +46,25 @@ over-engineering. The skill guides Codex to:
 It is designed for users who want AI assistance without letting the codebase
 become harder to understand than the problem it solves.
 
+### `tron-usdt-flow-tracing`
+
+`tron-usdt-flow-tracing` is a public-chain investigation workflow for TRON
+USDT/TRC20 fund flows.
+
+Use it when a user provides a TRON transaction hash, Tronscan URL, or address
+and wants to understand where USDT moved next. The skill guides Codex to:
+
+- verify the starting transaction and token details
+- follow downstream TRC20 transfers through Tronscan data
+- preserve transaction hashes, timestamps, amounts, addresses, and public labels
+- classify direct transfers, mixed-account downstream flows, and service endpoints
+- produce evidence tables, Mermaid diagrams, and exchange/law-enforcement action notes
+
+It is designed for scam-loss triage, compliance-style evidence organization, and
+repeatable blockchain investigation reports. It does not promise recovery,
+request wallet secrets, or claim identity beyond public chain data and explorer
+labels.
+
 ## Why This Exists
 
 AI coding agents are fast, but speed can make small assumptions expensive. This
@@ -65,8 +86,8 @@ code.
 
 For the most predictable behavior, invoke skills explicitly when you care about
 which workflow Codex follows. In Codex CLI or IDE, use `/skills` to pick a skill
-or mention the skill directly in the prompt, such as `$change-planning` or
-`$readable-development`.
+or mention the skill directly in the prompt, such as `$change-planning`,
+`$readable-development`, or `$tron-usdt-flow-tracing`.
 
 Recommended usage:
 
@@ -76,6 +97,8 @@ Recommended usage:
   maintainability, or avoiding over-engineering is the main concern.
 - Use both when needed: `$change-planning $readable-development` to plan first,
   then implement with a readability-first style after confirmation.
+- Use `$tron-usdt-flow-tracing` explicitly for crypto fund-flow tracing because
+  investigation tasks should preserve careful wording and evidence boundaries.
 - If only one workflow should apply, say so directly in the prompt, for example:
   `Use only $change-planning for this request.`
 
@@ -88,6 +111,9 @@ policy:
 
 This keeps general coding requests from picking up the readability workflow
 unless the user asks for it with `/skills` or `$readable-development`.
+
+`tron-usdt-flow-tracing` should also be invoked explicitly. This avoids
+accidentally treating ordinary crypto questions as scam investigations.
 
 ## Example Output Styles
 
@@ -143,6 +169,37 @@ typecheck.
 That is the core behavior `readable-development` tries to preserve: simple code
 with enough explanation for the next maintainer to find the important path.
 
+### TRON USDT Flow Report
+
+For a TRON USDT tracing request, `tron-usdt-flow-tracing` should guide Codex to
+produce a concise evidence-first report:
+
+```text
+Summary
+The initial TRON USDT transfer is confirmed. The funds moved from Binance-Hot 11
+to the reported recipient, then through active intermediate addresses. The most
+actionable endpoint identified is OKX Hot Wallet 8.
+
+Key Flow
+| Step | Time | Amount | From | To | Tx | Confidence |
+|---|---:|---:|---|---|---|---|
+
+Mermaid
+flowchart LR
+    A["Binance-Hot 11"] --> B["Reported recipient"]
+    B --> C["Intermediate address"]
+    C -.-> D["Mixed downstream flow"]
+    D --> E["OKX Hot Wallet 8"]
+
+Recommended Actions
+Preserve the exchange withdrawal record, file the listed hashes with law
+enforcement, and contact the exchange compliance channel. Do not share seed
+phrases or pay recovery scammers.
+```
+
+That is the core behavior `tron-usdt-flow-tracing` tries to preserve: useful
+fund-flow evidence without overstating what public chain data can prove.
+
 ## Repository Layout
 
 ```text
@@ -151,9 +208,19 @@ skills/
 |   |-- agents/
 |   |   `-- openai.yaml
 |   `-- SKILL.md
-`-- readable-development/
+|-- readable-development/
+|   |-- agents/
+|   |   `-- openai.yaml
+|   `-- SKILL.md
+`-- tron-usdt-flow-tracing/
     |-- agents/
     |   `-- openai.yaml
+    |-- assets/
+    |   `-- mermaid-template.mmd
+    |-- references/
+    |   |-- evidence-standards.md
+    |   |-- report-template.md
+    |   `-- tronscan-workflow.md
     `-- SKILL.md
 ```
 
@@ -167,6 +234,10 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/readable-development
+```
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/tron-usdt-flow-tracing
 ```
 
 Restart Codex after installing so it can discover the new skill.
@@ -183,6 +254,11 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 ```bash
 rm -rf ~/.codex/skills/readable-development
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/readable-development
+```
+
+```bash
+rm -rf ~/.codex/skills/tron-usdt-flow-tracing
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo paulwing/paulwing-codex-skills --path skills/tron-usdt-flow-tracing
 ```
 
 Restart Codex after updating.

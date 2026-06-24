@@ -1,0 +1,7 @@
+interface:
+  display_name: "TRON USDT Flow Tracing"
+  short_description: "Trace TRON USDT flows and produce evidence reports"
+  default_prompt: "Use $tron-usdt-flow-tracing to trace a TRON USDT transaction or address, classify downstream flow confidence, and produce a concise evidence report with a Mermaid diagram."
+
+policy:
+  allow_implicit_invocation: false

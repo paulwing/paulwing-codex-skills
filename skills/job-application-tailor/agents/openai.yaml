@@ -1,0 +1,4 @@
+interface:
+  display_name: "Job Application Tailor"
+  short_description: "Tailor resumes and interview prep to target jobs"
+  default_prompt: "Use $job-application-tailor to tailor my resume PDF and interview prep docs for this job."

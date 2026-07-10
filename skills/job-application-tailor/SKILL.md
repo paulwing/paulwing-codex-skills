@@ -1,19 +1,19 @@
 ---
 name: job-application-tailor
-description: Tailor job application materials from a job description, an existing resume file, and project code paths. Use when the user asks Codex to generate a targeted resume PDF, anonymized or role-specific resume content, a job interview preparation Markdown document with 1-minute/3-minute project pitches and Q&A, or a project technical-detail interview Markdown document based on local codebases and reference examples.
+description: Use when tailoring a resume PDF and two interview-preparation Markdown documents for a specific job description, especially when ATS keyword alignment, evidence-based rewriting, anonymization, or project-code inspection is required.
 ---
 
 # Job Application Tailor
 
 ## Overview
 
-Use this skill to turn a job description, the user's existing resume, and local project code paths into targeted job-search artifacts:
+Use this skill to turn a job description, the user's existing resume, and local project code paths into exactly three targeted job-search artifacts:
 
 1. A role-targeted resume PDF.
 2. A job interview preparation Markdown document.
 3. A project technical-detail interview Markdown document.
 
-Ask concise follow-up questions when required inputs are missing. Do not invent work history, companies, education, dates, or project ownership. When the user asks for anonymization, replace personal identity, schools, companies, project names, and exact dates with neutral descriptions.
+Do not change this three-artifact contract unless the user explicitly requests a subset. Ask concise follow-up questions when required inputs are missing. Do not invent work history, companies, education, dates, project ownership, skills, or metrics. When the user asks for anonymization, replace personal identity, schools, companies, project names, and exact dates with neutral descriptions.
 
 ## Required Inputs
 
@@ -25,28 +25,31 @@ Before producing artifacts, confirm or infer these inputs:
 - Output needs: resume PDF, interview-prep Markdown, technical-detail Markdown, or any subset.
 - Privacy level: original identity, partially anonymized, or fully anonymized.
 
-If any essential input is missing, ask for it before starting. If the missing input only affects quality, state the assumption and continue.
+If both the job description and resume are missing, ask exactly: “请粘贴职位描述和简历。” If only one is missing, ask only for that item. Treat attached files and readable file paths as supplied inputs; do not ask the user to paste content that can already be read. If a missing input only affects quality, state the assumption and continue.
 
 ## Workflow
 
 1. Gather context.
-   - Read the job description carefully and extract required capabilities.
+   - Read the job description and extract the role title, required skills, preferred skills, responsibilities, tools/technologies, soft skills, industry keywords, and domain terminology.
    - Extract the existing resume content using the appropriate document/PDF skill when needed.
    - Inspect local project code paths with `rg`, `rg --files`, targeted `cat`/`sed`, package manifests, routes, state stores, key components, API files, build config, and docs.
    - Read any user-provided reference documents, such as prior interview-prep Markdown files.
 
 2. Map experience to the job.
+   - Compare every required or relevant job keyword with the resume and code evidence.
+   - Classify each item as supported and strong, supported but weak, supported by adjacent experience, or unsupported.
+   - Emphasize and move supported evidence forward; express adjacent experience as transferable capability; omit unsupported claims.
    - Rank projects by job relevance.
    - For each relevant project, identify matching keywords, business scenarios, technical stack, measurable impact, and transferable skills.
    - Separate true project experience from technical reserve or learning demos.
 
 3. Produce the requested artifacts.
-   - For targeted resume PDF, follow [resume-pdf.md](references/resume-pdf.md).
+   - For the ATS-friendly targeted resume PDF, follow [resume-pdf.md](references/resume-pdf.md).
    - For job interview preparation Markdown, follow [job-interview-prep.md](references/job-interview-prep.md).
    - For project technical-detail Markdown, follow [technical-detail-prep.md](references/technical-detail-prep.md).
 
 4. Verify outputs.
-   - For PDFs, render or inspect pages when layout matters, and verify file existence.
+   - For the PDF, verify ATS structure, keyword coverage, factual support, rendering, readability, and file existence.
    - For Markdown, check the file path, heading structure, and that required sections are present.
    - Report output file paths and any assumptions or missing verification.
 
@@ -56,6 +59,7 @@ If any essential input is missing, ask for it before starting. If the missing in
 - Write generated PDF files into the current workspace unless the user specifies another path.
 - Use Chinese output when the user writes Chinese or the target job is described in Chinese.
 - Prefer concise, interview-ready language over long theoretical explanations.
+- Keep the resume concise, professional, naturally keyword-rich, and free of keyword stuffing.
 - Keep project statements defensible from the resume and code inspection.
 
 ## Codebase Reading Guidance

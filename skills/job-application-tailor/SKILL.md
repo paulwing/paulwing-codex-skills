@@ -15,6 +15,19 @@ Use this skill to turn a job description, the user's existing resume, and local 
 
 Do not change this three-artifact contract unless the user explicitly requests a subset. Ask concise follow-up questions when required inputs are missing. Do not invent work history, companies, education, dates, project ownership, skills, or metrics. When the user asks for anonymization, replace personal identity, schools, companies, project names, and exact dates with neutral descriptions.
 
+## Final Resume Content Firewall — Hard Rule
+
+The final resume PDF is a recruiter-facing artifact, not a record of the preparation process. Include only content that belongs in a finished professional resume: candidate facts, supported skills, work experience, project evidence, education, and job-relevant achievements.
+
+Never place any hidden working material or author commentary in the final resume, including:
+
+- preparation notes, reasoning, analysis, drafting rationale, evidence mappings, verification results, assumptions, caveats, disclaimers, or instructions to the user;
+- explanations of truthfulness boundaries, unsupported or unverified skills, omitted claims, missing information, or why particular wording was chosen;
+- sections such as `补充说明`, `说明`, `备注`, `写作说明`, `真实性说明`, `匹配分析`, or equivalent meta-content when they describe how the resume was prepared;
+- placeholders, TODOs, bracketed prompts, or suggestions about what the user could add later.
+
+Keep such material only in internal analysis, the two interview-preparation Markdown artifacts when relevant, or the delivery message. If uncertainty cannot be resolved, omit the resume claim; do not explain the omission inside the resume. This rule overrides any desire to make the resume look complete or to disclose the preparation process.
+
 ## Required Inputs
 
 Before producing artifacts, confirm or infer these inputs:
@@ -50,6 +63,7 @@ If both the job description and resume are missing, ask exactly: “请粘贴职
 
 4. Verify outputs.
    - For the PDF, verify ATS structure, keyword coverage, factual support, rendering, readability, and file existence.
+   - Extract and inspect the final PDF text. If it contains any preparation notes, reasoning, caveats, disclaimers, unsupported-skill explanations, placeholders, TODOs, or meta sections prohibited by the content firewall, remove them and regenerate the PDF before delivery.
    - For Markdown, check the file path, heading structure, and that required sections are present.
    - Report output file paths and any assumptions or missing verification.
 
